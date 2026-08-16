@@ -1,42 +1,34 @@
+import { useLanguage } from '../i18n/LanguageContext';
+import Segments from '../i18n/Segments';
 import './Hero.css';
 
-const STATS = [
-  { value: '5+', label: 'Ans d’expérience' },
-  { value: '30+', label: 'Projets livrés' },
-  { value: '20+', label: 'Clients satisfaits' },
-];
-
 export default function Hero() {
+  const { t } = useLanguage();
   const scrollTo = (href) => document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
 
   return (
     <section id="top" className="hero">
       <div className="container hero-inner">
         <div className="hero-content">
-          <div className="hero-badge">💼 IT & Location de luxe à Marrakech</div>
+          <div className="hero-badge">{t.hero.badge}</div>
 
           <h1>
-            Développeur Full-Stack et hôte de séjours d'exception à{' '}
-            <span className="text-gradient">Marrakech</span>
+            <Segments items={t.hero.heading} />
           </h1>
 
-          <p className="hero-subtitle">
-            Je conçois des sites et plateformes web sur mesure, et je gère en parallèle un
-            portefeuille de palais, villas, riads et appartements en location courte durée.
-            Deux activités, une même exigence de qualité.
-          </p>
+          <p className="hero-subtitle">{t.hero.subtitle}</p>
 
           <div className="hero-actions">
             <button className="btn btn-primary" onClick={() => scrollTo('#contact')}>
-              Démarrer un projet
+              {t.hero.ctaPrimary}
             </button>
             <button className="btn btn-secondary" onClick={() => scrollTo('#rentals')}>
-              Voir mes locations
+              {t.hero.ctaSecondary}
             </button>
           </div>
 
           <div className="hero-stats">
-            {STATS.map((s) => (
+            {t.hero.stats.map((s) => (
               <div key={s.label} className="hero-stat">
                 <div className="hero-stat-value">{s.value}</div>
                 <div className="hero-stat-label">{s.label}</div>

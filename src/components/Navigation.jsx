@@ -1,17 +1,11 @@
 import { useEffect, useState } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 import Logo from './Logo';
+import LanguageSwitcher from './LanguageSwitcher';
 import './Navigation.css';
 
-const LINKS = [
-  { label: 'À propos', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Locations', href: '#rentals' },
-  { label: 'Projets', href: '#portfolio' },
-  { label: 'Avis', href: '#testimonials' },
-  { label: 'Contact', href: '#contact' },
-];
-
 export default function Navigation() {
+  const { t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -36,7 +30,7 @@ export default function Navigation() {
         </a>
 
         <nav className={`navbar-links ${menuOpen ? 'is-open' : ''}`}>
-          {LINKS.map((link) => (
+          {t.nav.links.map((link) => (
             <a key={link.href} href={link.href} onClick={(e) => handleNavClick(e, link.href)}>
               {link.label}
             </a>
@@ -44,10 +38,11 @@ export default function Navigation() {
         </nav>
 
         <div className="navbar-actions">
+          <LanguageSwitcher />
           <button
             className={`menu-toggle ${menuOpen ? 'is-open' : ''}`}
             onClick={() => setMenuOpen((v) => !v)}
-            aria-label="Ouvrir le menu"
+            aria-label={t.nav.menuAriaLabel}
           >
             <span />
             <span />

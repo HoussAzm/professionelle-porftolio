@@ -1,14 +1,10 @@
 import { useState } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 import useReveal from '../hooks/useReveal';
 import './Contact.css';
 
-const CONTACT_INFO = [
-  { label: 'Email', value: 'houssamazmour@gmail.com', href: 'mailto:houssamazmour@gmail.com' },
-  { label: 'Localisation', value: 'Marrakech, Maroc' },
-  { label: 'Disponibilité', value: 'Ouvert aux missions freelance' },
-];
-
 export default function Contact() {
+  const { t } = useLanguage();
   const ref = useReveal();
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
@@ -29,15 +25,12 @@ export default function Contact() {
       <div className="container">
         <div ref={ref} className="contact-grid reveal">
           <div className="contact-info">
-            <span className="eyebrow">Contact</span>
-            <h2>Travaillons ensemble</h2>
-            <p className="contact-lead">
-              Un projet web en tête ou une envie de séjour à Marrakech ? Parlez-moi de vos
-              objectifs, je reviens vers vous sous 24h.
-            </p>
+            <span className="eyebrow">{t.contact.eyebrow}</span>
+            <h2>{t.contact.heading}</h2>
+            <p className="contact-lead">{t.contact.lead}</p>
 
             <div className="contact-list">
-              {CONTACT_INFO.map((item) => (
+              {t.contact.info.map((item) => (
                 <div key={item.label} className="contact-item">
                   <span className="contact-label">{item.label}</span>
                   {item.href ? (
@@ -51,24 +44,24 @@ export default function Contact() {
           </div>
 
           <form className="contact-form card" onSubmit={handleSubmit}>
-            {submitted && <div className="form-success">✓ Message envoyé, merci ! Je vous réponds rapidement.</div>}
+            {submitted && <div className="form-success">{t.contact.form.success}</div>}
 
             <label className="form-field">
-              <span>Nom</span>
-              <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Votre nom" required />
+              <span>{t.contact.form.nameLabel}</span>
+              <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder={t.contact.form.namePlaceholder} required />
             </label>
 
             <label className="form-field">
-              <span>Email</span>
-              <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="vous@exemple.com" required />
+              <span>{t.contact.form.emailLabel}</span>
+              <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder={t.contact.form.emailPlaceholder} required />
             </label>
 
             <label className="form-field">
-              <span>Message</span>
-              <textarea name="message" value={formData.message} onChange={handleChange} rows="5" placeholder="Parlez-moi de votre projet..." required />
+              <span>{t.contact.form.messageLabel}</span>
+              <textarea name="message" value={formData.message} onChange={handleChange} rows="5" placeholder={t.contact.form.messagePlaceholder} required />
             </label>
 
-            <button type="submit" className="btn btn-primary">Envoyer le message</button>
+            <button type="submit" className="btn btn-primary">{t.contact.form.submit}</button>
           </form>
         </div>
       </div>

@@ -1,13 +1,9 @@
+import { useLanguage } from '../i18n/LanguageContext';
 import Logo from './Logo';
 import './Footer.css';
 
-const SOCIALS = [
-  { label: 'GitHub', href: 'https://github.com' },
-  { label: 'LinkedIn', href: 'https://linkedin.com' },
-  { label: 'Email', href: 'mailto:houssamazmour@gmail.com' },
-];
-
 export default function Footer() {
+  const { t } = useLanguage();
   const year = new Date().getFullYear();
 
   return (
@@ -19,12 +15,12 @@ export default function Footer() {
         </div>
 
         <div className="footer-socials">
-          {SOCIALS.map((s) => (
+          {t.footer.socials.map((s) => (
             <a key={s.label} href={s.href} target="_blank" rel="noreferrer">{s.label}</a>
           ))}
         </div>
 
-        <p className="footer-copy">© {year} Houssam Azmour. Tous droits réservés.</p>
+        <p className="footer-copy">© {year} Houssam Azmour. {t.footer.rights}</p>
       </div>
     </footer>
   );
